@@ -1,0 +1,28 @@
+{
+    "name": "winmillwill/composer-drupal",
+    "type": "composer-plugin",
+    "description": "not as bad as drush make",
+    "license": "Apache-2.0",
+    "repositories": [
+      {
+        "type": "vcs",
+        "url": "git://github.com/Haehnchen/drupal-packagist.git"
+      }
+    ],
+    "require": {
+        "composer/composer": "dev-master",
+        "espend/drupal-packagist": "dev-master",
+        "kriswallsmith/buzz": "dev-master"
+    },
+    "autoload": {
+      "psr-0": {
+        "": "src/"
+      }
+    },
+    "authors": [
+        {
+            "name": "Will Milton",
+            "email": "will@promethost.com"
+        }
+    ]
+}
