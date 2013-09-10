@@ -10,6 +10,7 @@
       }
     ],
     "require": {
+        "composer-plugin-api": "1.0.0",
         "composer/composer": "dev-master",
         "espend/drupal-packagist": "dev-master",
         "kriswallsmith/buzz": "dev-master"
@@ -18,6 +19,9 @@
       "psr-0": {
         "": "src/"
       }
+    },
+    "extra": {
+        "class": "winmillwill\\Composer\\Drupal\\Plugin"
     },
     "authors": [
         {

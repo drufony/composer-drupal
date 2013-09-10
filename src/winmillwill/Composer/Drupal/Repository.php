@@ -15,22 +15,19 @@ use Drupal\PackagistBundle\Parser\ComposerPackageConvert;
 
 class Repository extends ArrayRepository
 {
-    public function __construct(array $repoConfig, IOInterface $io,
-        Config $config, RemoteFilesystem $rfs = null)
+    public function __construct(array $repoConfig = array())
     {
-        if (!preg_match('{^https?://}', $repoConfig['url'])) {
-            $repoConfig['url'] = 'http://'.$repoConfig['url'];
-        }
+        /* if (!preg_match('{^https?://}', $repoConfig['url'])) { */
+        /*     $repoConfig['url'] = 'http://'.$repoConfig['url']; */
+        /* } */
 
-        $urlBits = parse_url($repoConfig['url']);
-        if (empty($urlBits['scheme']) || empty($urlBits['host'])) {
-            throw new \UnexpectedValueException('Invalid url given for Drupal.org repository: '.$repoConfig['url']);
-        }
+        /* $urlBits = parse_url($repoConfig['url']); */
+        /* if (empty($urlBits['scheme']) || empty($urlBits['host'])) { */
+        /*     throw new \UnexpectedValueException('Invalid url given for Drupal.org repository: '.$repoConfig['url']); */
+        /* } */
 
-        $this->url = rtrim($repoConfig['url'], '/');
-        $this->io = $io;
-        $this->rfs = $rfs ?: new RemoteFilesystem($this->io);
-        $this->versionParser = new VersionParser();
+        /* $this->url = rtrim($repoConfig['url'], '/'); */
+        /* $this->versionParser = new VersionParser(); */
     }
 
     public function search($query, $mode = 0)
