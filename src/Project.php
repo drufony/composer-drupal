@@ -1,6 +1,6 @@
 <?php
 
-namespace winmillwill\Composer\Drupal;
+namespace Bangpound\Composer\Drupal;
 
 class Project
 {
