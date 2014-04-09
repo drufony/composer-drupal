@@ -37,6 +37,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         $this->io = $io;
         $this->rfs = new RemoteFilesystem($io);
         $this->versionParser = new VersionParser();
+        $config = $composer->getConfig();
     }
 
     public static function getSubscribedEvents()
@@ -58,14 +59,16 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         $extra = $package->getExtra();
         if (!empty($extra['drupal-projects'])) {
             $projects = is_array($extra['drupal-projects']) ? $extra['drupal-projects'] : array($extra['drupal-projects']);
+            $packages = array();
             foreach ($projects as $project) {
                 foreach ($this->getRepository($project) as $config) {
-                    $repo = $repositoryManager->createRepository('package', array(
-                        'package' => $config,
-                    ));
-                    $repositoryManager->addRepository($repo);
+                    $packages[] = $config;
                 }
             }
+            $repo = $repositoryManager->createRepository('package', array(
+                'package' => $packages,
+            ));
+            $repositoryManager->addRepository($repo);
         }
     }
 
@@ -85,7 +88,10 @@ class Plugin implements PluginInterface, EventSubscriberInterface
                 $result = $this->rfs->getContents($url, $url, false);
                 $project = new Project($result);
                 foreach ($project->getReleases() as $release) {
-                    $packages[] = $this->toRepositoryConfig($project, $release);
+                    $package = $this->toRepositoryConfig($project, $release);
+                    if ($package) {
+                        $packages[] = $package;
+                    }
                 }
             }
         }
@@ -103,11 +109,17 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         );
         $dc = $project->xml->children($ns['dc']);
 
+        try {
+            $parser = new VersionParser();
+            $parser->normalize($version);
+        } catch (\UnexpectedValueException $e) {
+            $version = 'dev-'. $version;
+        }
+
         $package = array();
         $package['name'] = 'drupal/'. $project->xml->short_name;
         $package['description'] = (string) $project->xml->title;
         $package['version'] = $version;
-        $package['stability'] = VersionParser::parseStability($version);
         $package['homepage'] = (string) $project->xml->link;
 
         $package['dist'] = array(
