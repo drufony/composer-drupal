@@ -6,7 +6,7 @@
     "repositories": [
       {
         "type": "vcs",
-        "url": "git://github.com/Haehnchen/drupal-packagist.git"
+        "url": "/Users/bjd/build/composer-drupal/vendor/espend/drupal-packagist/Drupal/PackagistBundle/.git"
       }
     ],
     "require": {
