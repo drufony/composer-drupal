@@ -51,13 +51,14 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    function createRepository()
+    public function createRepository()
     {
         $io = $this->getMockBuilder('Composer\IO\IOInterface')
             ->getMock();
         $config = new \Composer\Config();
         $repoConfig = array('url' => 'updates.drupal.org');
         $this->repository = new Repository($repoConfig, $io, $config);
+
         return $this->repository;
     }
 }

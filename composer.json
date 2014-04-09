@@ -1,32 +1,17 @@
 {
-    "name": "winmillwill/composer-drupal",
+    "name": "bangpound/composer-drupal",
     "type": "composer-plugin",
     "description": "not as bad as drush make",
     "license": "Apache-2.0",
-    "repositories": [
-      {
-        "type": "vcs",
-        "url": "/Users/bjd/build/composer-drupal/vendor/espend/drupal-packagist/Drupal/PackagistBundle/.git"
-      }
-    ],
     "require": {
-        "composer-plugin-api": "1.0.0",
-        "composer/composer": "dev-master",
-        "espend/drupal-packagist": "dev-master",
-        "kriswallsmith/buzz": "dev-master"
+        "composer-plugin-api": "1.0.0"
     },
     "autoload": {
-      "psr-0": {
-        "": "src/"
+      "psr-4": {
+        "Bangpound\\Composer\\Drupal\\": "src/"
       }
     },
     "extra": {
-        "class": "winmillwill\\Composer\\Drupal\\Plugin"
-    },
-    "authors": [
-        {
-            "name": "Will Milton",
-            "email": "will@promethost.com"
-        }
-    ]
+        "class": "Bangpound\\Composer\\Drupal\\Plugin"
+    }
 }
