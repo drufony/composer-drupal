@@ -1,5 +1,5 @@
 {
-    "name": "bangpound/composer-drupal",
+    "name": "winmillwill/composer-drupal",
     "type": "composer-plugin",
     "description": "not as bad as drush make",
     "license": "Apache-2.0",
